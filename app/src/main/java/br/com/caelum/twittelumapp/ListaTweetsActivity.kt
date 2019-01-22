@@ -15,5 +15,6 @@ class ListaTweetsActivity : AppCompatActivity() {
         val arrayAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tweets)
 
         listaTweets.adapter = arrayAdapter
+
     }
 }
