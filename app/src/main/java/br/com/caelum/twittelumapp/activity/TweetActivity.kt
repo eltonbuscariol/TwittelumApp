@@ -1,14 +1,14 @@
-package br.com.caelum.twittelumapp
+package br.com.caelum.twittelumapp.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
+import br.com.caelum.twittelumapp.R
+import br.com.caelum.twittelumapp.database.TwittelumDatabase
 import br.com.caelum.twittelumapp.modelo.Tweet
+import kotlinx.android.synthetic.main.activity_tweet.*
 
 class TweetActivity : AppCompatActivity() {
 
@@ -39,8 +39,10 @@ class TweetActivity : AppCompatActivity() {
 
     private fun publicaTweet() {
 
-        val conteudo = findViewById<EditText>(R.id.tweet_mensagem)
-        val tweet = Tweet(conteudo.text.toString())
+        val tweet = Tweet(tweet_mensagem.text.toString())
+
+        val tweetDao = TwittelumDatabase.getInstance().tweetDao()
+        tweetDao.salva(tweet)
 
         // Qualquer das duas maneiras
         //Toast.makeText(this, tweet.toString(), Toast.LENGTH_SHORT).show()

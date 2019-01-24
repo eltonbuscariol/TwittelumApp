@@ -3,20 +3,23 @@
           package="br.com.caelum.twittelumapp">
 
     <application
+            android:name=".application.TwittelumApplication"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".ListaTweetsActivity">
+        <activity android:name=".activity.SplashScreen"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".TweetActivity"/>
+        <activity android:name=".activity.ListaTweetsActivity"/>
+        <activity android:name=".activity.TweetActivity"/>
     </application>
 
 </manifest>
