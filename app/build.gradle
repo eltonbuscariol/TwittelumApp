@@ -36,4 +36,5 @@ dependencies {
 
     implementation "android.arch.persistence.room:runtime:1.1.1" // Room
     kapt "android.arch.persistence.room:compiler:1.1.1" // leitor de anotações
+    implementation "android.arch.lifecycle:extensions:1.1.1"
 }

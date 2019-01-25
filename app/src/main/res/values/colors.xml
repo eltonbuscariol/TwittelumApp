@@ -5,4 +5,5 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorTweet">#4AA0EC</color>
     <color name="colorTweetDark">#004f94</color>
+    <color name="colorTextInvert">#FFFFFF</color>
 </resources>
