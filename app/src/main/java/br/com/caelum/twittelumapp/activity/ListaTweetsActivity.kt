@@ -33,10 +33,13 @@ class ListaTweetsActivity : AppCompatActivity() {
            listaTweets.adapter = arrayAdapter
        })
 
-        listaTweets.onItemClickListener  = AdapterView.OnItemClickListener { adapter, view, position, id ->
+        listaTweets.onItemLongClickListener  = AdapterView.OnItemLongClickListener { adapter, view, position, id ->
+
             val tweet = listaTweets.getItemAtPosition(position) as Tweet
 
-            perguntaSePodeDeletar(tweet)
+             perguntaSePodeDeletar(tweet)
+
+            true
         }
 
         fabAddTweet.setOnClickListener {

@@ -1,45 +1,79 @@
 package br.com.caelum.twittelumapp.activity
 
+import android.app.Activity
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.view.Menu
+import android.provider.MediaStore
+import android.support.v4.content.FileProvider
 import android.view.MenuItem
+import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import br.com.caelum.twittelumapp.R
-import br.com.caelum.twittelumapp.database.TwittelumDatabase
+import br.com.caelum.twittelumapp.extensions.decodificarParaBase64
 import br.com.caelum.twittelumapp.modelo.Tweet
 import br.com.caelum.twittelumapp.viewmodel.Injetor
 import br.com.caelum.twittelumapp.viewmodel.TweetViewModel
 import kotlinx.android.synthetic.main.activity_tweet.*
+import java.io.File
 
 class TweetActivity : AppCompatActivity() {
 
+    private var localFoto : String? = null
+    private val REQUEST_PHOTO : Int = 0
     // Outra maneira de deixa a instância do objeto para depois
     private lateinit var viewModel: TweetViewModel
 //    private val viewModel : TweetViewModel by lazy {
 //        ViewModelProviders.of(this, Injetor).get(TweetViewModel::class.java)
 //    }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tweet)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         viewModel = ViewModelProviders.of(this, Injetor).get(TweetViewModel::class.java)
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.tweet_menu, menu)
-        return true
-    }
+        cameraButton.setOnClickListener {
+            tirarFoto()
+        }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean = when(item?.itemId) {
-        R.id.salvar_tweet_menu -> {
+        saveButton.setOnClickListener {
             publicaTweet()
             finish()
-            true
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        if(requestCode == REQUEST_PHOTO){
+            if (resultCode == Activity.RESULT_OK){
+                carregaFoto()
+            }
+        }
+
+    }
+
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.tweet_menu, menu)
+//        return true
+//    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean = when(item?.itemId) {
+//        R.id.salvar_tweet_menu -> {
+//            publicaTweet()
+//            finish()
+//            true
+//        }
+//        R.id.photo_menu ->{
+//            tirarFoto()
+//            true
+//        }
         android.R.id.home -> {
             finish()
             true
@@ -47,9 +81,39 @@ class TweetActivity : AppCompatActivity() {
         else -> false
     }
 
+    private fun tirarFoto() {
+
+        val vaiPraCamera = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
+        val caminhoFoto = defineLocalDaFoto()
+
+        vaiPraCamera.putExtra(MediaStore.EXTRA_OUTPUT, caminhoFoto)
+
+        startActivityForResult(vaiPraCamera, REQUEST_PHOTO)
+    }
+
+    private fun defineLocalDaFoto(): Uri? {
+        localFoto = "${getExternalFilesDir("fotos")}/${System.currentTimeMillis()}.jpg"
+
+        val arquivo = File(localFoto)
+
+        return FileProvider.getUriForFile(this, "MeuProvider", arquivo)
+
+    }
+
+    private fun carregaFoto() {
+        val bitmap = BitmapFactory.decodeFile(localFoto)
+        val scaledBitmap = Bitmap.createScaledBitmap(bitmap, 300, 300, true)
+        tweet_foto_form.setImageBitmap(scaledBitmap)
+        val fotoNaBase64 = scaledBitmap.decodificarParaBase64()
+        tweet_foto_form.tag = fotoNaBase64
+        tweet_foto_form.scaleType = ImageView.ScaleType.FIT_XY
+        card_foto_form.visibility = View.VISIBLE
+    }
+
     private fun publicaTweet() {
 
-        val tweet = Tweet(tweet_mensagem.text.toString())
+        val tweet = Tweet(tweet_mensagem.text.toString(), tweet_foto_form.tag as String?)
 
         viewModel.salva(tweet)
 
@@ -58,4 +122,5 @@ class TweetActivity : AppCompatActivity() {
         Toast.makeText(this, "$tweet", Toast.LENGTH_SHORT).show()
         //Snackbar.make(this, "$tweet", Snackbar.LENGTH_SHORT).show()
     }
+
 }
