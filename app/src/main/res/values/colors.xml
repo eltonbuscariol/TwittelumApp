@@ -6,4 +6,5 @@
     <color name="colorTweet">#4AA0EC</color>
     <color name="colorTweetDark">#004f94</color>
     <color name="colorTextInvert">#FFFFFF</color>
+    <color name="colorBody">#F0F0F0</color>
 </resources>

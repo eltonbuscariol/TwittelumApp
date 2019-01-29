@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import br.com.caelum.twittelumapp.R
+import br.com.caelum.twittelumapp.adapter.TweetAdapter
 import br.com.caelum.twittelumapp.database.TweetDao
 import br.com.caelum.twittelumapp.database.TwittelumDatabase
 import br.com.caelum.twittelumapp.modelo.Tweet
@@ -28,9 +29,12 @@ class ListaTweetsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_lista_tweets)
 
        viewModel.lista().observe(this, Observer { tweets ->
-           val arrayAdapter = ArrayAdapter<Tweet>(this, android.R.layout.simple_list_item_1, tweets)
 
-           listaTweets.adapter = arrayAdapter
+           tweets?.let {
+               val arrayAdapter = TweetAdapter(it)
+
+               listaTweets.adapter = arrayAdapter
+           }
        })
 
         listaTweets.onItemLongClickListener  = AdapterView.OnItemLongClickListener { adapter, view, position, id ->
