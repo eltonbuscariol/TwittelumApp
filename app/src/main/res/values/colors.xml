@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <!--<color name="colorPrimary">#008577</color>-->
+    <color name="colorPrimary">#4AA0EC</color>
+    <!--<color name="colorPrimaryDark">#00574B</color>-->
+    <color name="colorPrimaryDark">#004f94</color>
+    <!--<color name="colorAccent">#D81B60</color>-->
+    <color name="colorAccent">#d85a1b</color>
     <color name="colorTweet">#4AA0EC</color>
     <color name="colorTweetDark">#004f94</color>
     <color name="colorTextInvert">#FFFFFF</color>
     <color name="colorBody">#F0F0F0</color>
+    <color name="branco">#FFFFFF</color>
+    <color name="cinza">#b1bfbfbf</color>
 </resources>

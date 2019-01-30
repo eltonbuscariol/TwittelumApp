@@ -13,7 +13,7 @@ class SplashScreen : AppCompatActivity() {
 
     internal val mRunnable : Runnable = Runnable {
         if (!isFinishing){
-            val intent = Intent(applicationContext, ListaTweetsActivity::class.java)
+            val intent = Intent(applicationContext, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }

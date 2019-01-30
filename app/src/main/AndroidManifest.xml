@@ -10,27 +10,26 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".activity.SplashScreen"
-            android:theme="@style/SplashTheme">
+        <activity
+                android:name=".activity.SplashScreen"
+                android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ListaTweetsActivity"/>
+        <activity android:name=".activity.MainActivity"/>
         <activity android:name=".activity.TweetActivity"/>
-
+        <activity android:name=".activity.LoginActivity"/>
         <provider
-                android:authorities="MeuProvider"
                 android:name="android.support.v4.content.FileProvider"
+                android:authorities="MeuProvider"
                 android:exported="false"
                 android:grantUriPermissions="true">
             <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/provider_paths"/>
         </provider>
-
     </application>
-
 </manifest>
