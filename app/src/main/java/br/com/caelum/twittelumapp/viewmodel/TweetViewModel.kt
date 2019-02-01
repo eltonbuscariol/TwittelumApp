@@ -6,7 +6,11 @@ import br.com.caelum.twittelumapp.repository.TweetRepository
 
 class TweetViewModel(private val repository: TweetRepository) : ViewModel() {
 
-    fun  lista() = repository.lista()
+    fun  tweets() = repository.lista
+
+    fun erro() = repository.erro
+
+    fun buscaTweets() = repository.busca()
 
     fun salva(tweet: Tweet) = repository.salva(tweet)
 

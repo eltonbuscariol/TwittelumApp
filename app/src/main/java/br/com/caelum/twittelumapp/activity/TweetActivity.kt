@@ -19,6 +19,7 @@ import br.com.caelum.twittelumapp.extensions.decodificarParaBase64
 import br.com.caelum.twittelumapp.modelo.Tweet
 import br.com.caelum.twittelumapp.viewmodel.Injetor
 import br.com.caelum.twittelumapp.viewmodel.TweetViewModel
+import br.com.caelum.twittelumapp.viewmodel.UsuarioViewModel
 import kotlinx.android.synthetic.main.activity_tweet.*
 import java.io.File
 
@@ -26,6 +27,9 @@ class TweetActivity : AppCompatActivity() {
 
     private var localFoto : String? = null
     private val REQUEST_PHOTO : Int = 0
+    private val usuarioViewModel by lazy {
+        ViewModelProviders.of(this, Injetor).get(UsuarioViewModel::class.java)
+    }
     // Outra maneira de deixa a instância do objeto para depois
     private lateinit var viewModel: TweetViewModel
 //    private val viewModel : TweetViewModel by lazy {
@@ -113,7 +117,8 @@ class TweetActivity : AppCompatActivity() {
 
     private fun publicaTweet() {
 
-        val tweet = Tweet(tweet_mensagem.text.toString(), tweet_foto_form.tag as String?)
+        val dono = usuarioViewModel.usuarioDaSessao().value
+        val tweet = Tweet(tweet_mensagem.text.toString(), tweet_foto_form.tag as String?, dono!! )
 
         viewModel.salva(tweet)
 

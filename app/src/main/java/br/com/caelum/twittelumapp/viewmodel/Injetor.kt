@@ -7,13 +7,15 @@ import br.com.caelum.twittelumapp.database.TwittelumDatabase
 import br.com.caelum.twittelumapp.repository.TweetRepository
 import br.com.caelum.twittelumapp.repository.UsuarioRepository
 import br.com.caelum.twittelumapp.webclient.InicializadorDoRetrofit
+import br.com.caelum.twittelumapp.webclient.TweetWebClient
 import br.com.caelum.twittelumapp.webclient.UsuarioWebClient
 
 object Injetor : ViewModelProvider.Factory {
 
-    private val database: TwittelumDatabase = TwittelumDatabase.getInstance()
-    private val fonteDeDados: TweetDao = database.tweetDao()
-    private val tweetRepository: TweetRepository = TweetRepository(fonteDeDados)
+//    private val database: TwittelumDatabase = TwittelumDatabase.getInstance()
+//    private val fonteDeDados: TweetDao = database.tweetDao()
+//    private val tweetRepository: TweetRepository = TweetRepository(fonteDeDados)
+    private val tweetRepository: TweetRepository = TweetRepository(TweetWebClient(InicializadorDoRetrofit.retrofit))
     private val usuarioRepository = UsuarioRepository(UsuarioWebClient(InicializadorDoRetrofit.retrofit))
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T = when (modelClass) {

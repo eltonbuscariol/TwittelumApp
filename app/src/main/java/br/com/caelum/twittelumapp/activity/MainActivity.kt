@@ -49,6 +49,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         bottom_navigation.selectedItemId = R.id.menu_tweets
+
+        mainFab.setOnClickListener {
+            startActivity(Intent(this, TweetActivity::class.java))
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

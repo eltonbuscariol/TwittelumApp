@@ -15,6 +15,10 @@ class TweetAdapter(private val tweets: List<Tweet>) : BaseAdapter() {
         val tweet = tweets[position]
         val view = inflater.inflate(R.layout.item_tweet, parent, false)
         view.item_conteudo.text = tweet.mensagem
+        tweet.dono?.let {
+            view.item_dono.text = tweet.dono.nome
+            view.item_username.text = tweet.dono.username
+        }
         tweet.foto?.let { foto ->
             view.item_foto.visibility = View.VISIBLE
             view.item_foto.setImageBitmap(CarregadorImagem.decodifica(foto))
@@ -24,7 +28,7 @@ class TweetAdapter(private val tweets: List<Tweet>) : BaseAdapter() {
 
     override fun getItem(position: Int): Any = tweets[position]
 
-    override fun getItemId(position: Int): Long  = tweets[position].id.toLong()
+    override fun getItemId(position: Int): Long = tweets[position].id.toLong()
 
     override fun getCount(): Int = tweets.size
 

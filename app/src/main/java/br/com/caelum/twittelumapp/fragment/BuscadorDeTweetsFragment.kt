@@ -50,7 +50,7 @@ class BuscadorDeTweetsFragment : Fragment() {
         val filtrados = ArrayList<Tweet>()
 
         if (!texto.isNullOrEmpty()) {
-            viewModel.lista().observe(this, Observer {tweets->
+            viewModel.tweets().observe(this, Observer {tweets->
                 tweets?.let {
                     filtrados.addAll(tweets.filter { tweet -> tweet.mensagem.contains(texto!!, true) })
                     listaTweets.adapter = TweetAdapter(filtrados)
@@ -61,8 +61,7 @@ class BuscadorDeTweetsFragment : Fragment() {
         else
         {
             filtrados.clear()
+            listaTweets.adapter = null
         }
-
-        listaTweets.adapter = TweetAdapter(filtrados)
     }
 }

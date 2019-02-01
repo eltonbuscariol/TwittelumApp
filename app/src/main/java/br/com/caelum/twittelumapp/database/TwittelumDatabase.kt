@@ -6,7 +6,7 @@ import android.arch.persistence.room.RoomDatabase
 import br.com.caelum.twittelumapp.application.TwittelumApplication
 import br.com.caelum.twittelumapp.modelo.Tweet
 
-@Database(entities = [Tweet::class], version = 2)
+//@Database(entities = [Tweet::class], version = 2)
 abstract class TwittelumDatabase : RoomDatabase() {
 
     abstract fun tweetDao() : TweetDao

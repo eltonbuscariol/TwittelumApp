@@ -10,13 +10,13 @@ import br.com.caelum.twittelumapp.modelo.Tweet
 @Dao
 interface TweetDao {
 
-    @Insert
-    fun salva(tweet: Tweet)
-
-    @Query("select * from Tweet")
-    fun lista() : LiveData<List<Tweet>>
-
-    @Delete()
-    fun deleta(tweet: Tweet)
+//    @Insert
+//    fun salva(tweet: Tweet)
+//
+//    @Query("select * from Tweet")
+//    fun lista() : LiveData<List<Tweet>>
+//
+//    @Delete()
+//    fun deleta(tweet: Tweet)
 
 }
