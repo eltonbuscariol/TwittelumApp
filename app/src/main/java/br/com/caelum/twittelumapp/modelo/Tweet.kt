@@ -7,7 +7,9 @@ import android.arch.persistence.room.PrimaryKey
 data class Tweet(
     val mensagem:String,
     val foto:String?,
-    val dono : Usuario? = null,
+    val dono : Usuario,
+    val latitude : Double,
+    val longitude : Double,
     val id : Long = 0){
 
     override fun toString(): String {
